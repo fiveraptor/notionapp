@@ -1,0 +1,20 @@
+{
+  "name": "Notion",
+  "version": "1.0.0",
+  "description": "An unofficial Notion App for Linux.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@electron/packager": "^18.3.5",
+    "electron": "^33.0.0"
+  },
+  "dependencies": {
+    "glob": "^11.0.0"
+  }
+}

@@ -1,0 +1,4 @@
+package-lock.json
+node_modules/
+release-builds/
+Notion-linux-x64.tar.gz
