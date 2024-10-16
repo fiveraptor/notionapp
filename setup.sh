@@ -7,7 +7,7 @@ DESKTOP_FILE="$HOME/.local/share/applications/$APP_NAME.desktop"
 ICON_DIR="$HOME/.local/share/icons"
 ICON_FILE="$ICON_DIR/$APP_NAME.png"
 EXECUTABLE="$APP_DIR/Notion"
-REPO_URL="https://github.com/fiveraptor/notionapp/releases/download/v0.2/Notion-linux-x64.tar.gz"
+GITHUB_REPO="fiveraptor/notionapp"
 
 # 1. App-Verzeichnis erstellen
 echo "Erstelle Anwendungsverzeichnis..."
@@ -17,18 +17,28 @@ if [ -d "$APP_DIR" ]; then
 fi
 mkdir -p "$APP_DIR"
 
-# 2. Download der App
-echo "Lade Notion App herunter..."
-wget $REPO_URL -O NotionApp-linux-x64.tar.gz
+# 2. Neueste Release-URL von GitHub abrufen
+echo "Suche nach der neuesten Version von $APP_NAME..."
+API_URL="https://api.github.com/repos/$GITHUB_REPO/releases/latest"
+DOWNLOAD_URL=$(curl -s $API_URL | grep "browser_download_url" | grep "Notion-linux-x64.tar.gz" | cut -d '"' -f 4)
+
+if [ -z "$DOWNLOAD_URL" ]; then
+  echo "Fehler: Konnte die neueste Version nicht abrufen."
+  exit 1
+fi
+
+# 3. Download der App
+echo "Lade die neueste Version von $APP_NAME herunter..."
+wget $DOWNLOAD_URL -O NotionApp-linux-x64.tar.gz
 tar -xzf NotionApp-linux-x64.tar.gz -C "$APP_DIR"
 rm NotionApp-linux-x64.tar.gz
 
-# 3. Icon-Verzeichnis erstellen und Icon kopieren
+# 4. Icon-Verzeichnis erstellen und Icon kopieren
 echo "Kopiere Icon..."
 mkdir -p "$ICON_DIR"
 cp "$APP_DIR/resources/app/resources/notion-icon.png" "$ICON_FILE"
 
-# 4. Erstellen der .desktop-Datei
+# 5. Erstellen der .desktop-Datei
 echo "Erstelle Menüeintrag..."
 cat <<EOL > "$DESKTOP_FILE"
 [Desktop Entry]
@@ -42,9 +52,9 @@ Type=Application
 Categories=Utility;
 EOL
 
-# 5. Datei ausführbar machen
+# 6. Datei ausführbar machen
 chmod +x "$DESKTOP_FILE"
 chmod +x "$EXECUTABLE"
 
-# 6. Installation abschließen
+# 7. Installation abschließen
 echo "$APP_NAME wurde erfolgreich installiert! Du kannst es nun aus dem Anwendungsmenü starten."
