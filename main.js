@@ -8,7 +8,8 @@ function createWindow() {
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
     },
-    icon: path.join(__dirname, 'resources', 'notion-icon.png') // Fenster-Icon
+    icon: path.join(__dirname, 'resources', 'notion-icon.png'), // Window icon
+    autoHideMenuBar: true // Hide menu bar
   });
 
   win.loadURL('https://www.notion.so');
@@ -17,7 +18,7 @@ function createWindow() {
 app.whenReady().then(() => {
   createWindow();
 
-  // Spezielles Dock-Icon setzen (für GNOME, KDE, Cinnamon, macOS)
+  // Set specific dock icon (for GNOME, KDE, Cinnamon, macOS)
   const dockIcon = nativeImage.createFromPath(path.join(__dirname, 'resources', 'notion-icon.png'));
   if (app.dock) {
     app.dock.setIcon(dockIcon);
