@@ -7,37 +7,37 @@ DESKTOP_FILE="$HOME/.local/share/applications/$APP_NAME.desktop"
 ICON_FILE="$HOME/.local/share/icons/$APP_NAME.png"
 CONFIG_DIR="$HOME/.config/$APP_NAME"
 
-# 1. Entfernen des Anwendungsverzeichnisses
+# 1. Remove the application directory
 if [ -d "$APP_DIR" ]; then
-  echo "Entferne Anwendungsverzeichnis $APP_DIR..."
+  echo "Removing application directory $APP_DIR..."
   rm -rf "$APP_DIR"
 else
-  echo "Das Anwendungsverzeichnis $APP_DIR wurde nicht gefunden."
+  echo "The application directory $APP_DIR was not found."
 fi
 
-# 2. Entfernen der .desktop-Datei
+# 2. Remove the .desktop file (menu entry)
 if [ -f "$DESKTOP_FILE" ]; then
-  echo "Entferne Menüeintrag $DESKTOP_FILE..."
+  echo "Removing menu entry $DESKTOP_FILE..."
   rm "$DESKTOP_FILE"
 else
-  echo "Die .desktop-Datei $DESKTOP_FILE wurde nicht gefunden."
+  echo "The .desktop file $DESKTOP_FILE was not found."
 fi
 
-# 3. Entfernen des Icons
+# 3. Remove the icon
 if [ -f "$ICON_FILE" ]; then
-  echo "Entferne Icon $ICON_FILE..."
+  echo "Removing icon $ICON_FILE..."
   rm "$ICON_FILE"
 else
-  echo "Das Icon $ICON_FILE wurde nicht gefunden."
+  echo "The icon $ICON_FILE was not found."
 fi
 
-# 4. Entfernen des Konfigurationsordners
+# 4. Remove the configuration folder
 if [ -d "$CONFIG_DIR" ]; then
-  echo "Entferne Konfigurationsordner $CONFIG_DIR..."
+  echo "Removing configuration folder $CONFIG_DIR..."
   rm -rf "$CONFIG_DIR"
 else
-  echo "Der Konfigurationsordner $CONFIG_DIR wurde nicht gefunden."
+  echo "The configuration folder $CONFIG_DIR was not found."
 fi
 
-# 5. Abschluss der Deinstallation
-echo "$APP_NAME wurde erfolgreich deinstalliert."
+# 5. Complete the uninstallation
+echo "$APP_NAME has been successfully uninstalled."
